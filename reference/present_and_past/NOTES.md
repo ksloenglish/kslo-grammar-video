@@ -423,3 +423,17 @@ TODO: visual check of glow titles (level cards 1.0-4.0, 3.3 PLOT TWIST, C), stil
   black + silent end. Captions 77 cues EN = ZH, YouTube text rebuilt from timeline. verify_transcript: ALL CHECKS PASSED
   (A vs B 98.1%, B vs script 98.4%; only recogniser spellings mum/mom, practising/practicing, o'clock/00, -ed/e d).
   Bye crop offset = L3 t0 + 6.13 (L3 t0 now 303.833).
+
+## Round 12 (20 Oct 2026, 07:32-07:48 HKT): skill + public asset repo
+- Teacher request: record all instructions/requirements/issues/fixes in a skill; save assets PUBLIC on ksloenglish GitHub
+  like kslo-vocab-video; include cost-saving instructions without lowering quality.
+- Skill: /home/ubuntu/skills/kslo-grammar-video (SKILL.md + references: requirements, corrections_log, voice_and_audio,
+  engine_and_design, script_writing, qa_checklist, cost_saving, sharing_and_access; scripts: fetch_assets.sh,
+  init_project.sh). Validated. Mirrored in repo at skill/kslo-grammar-video/.
+- Repo: https://github.com/ksloenglish/kslo-grammar-video (PUBLIC, plain git, ~154 MB). Release present-and-past-v1 =
+  final MP4 (55,475,249 B) + EN/zh-HK SRTs. Anonymous README/release/clone verified.
+- Reproducibility test: init_project.sh -> /tmp/gtest from the repo alone: timeline 319.60 s identical; 6 stills
+  pixel-identical except sub-pixel anti-aliasing on the C title (visually identical).
+- proto/layer.py: Chromium path now _chromium() (CHROMIUM env, /usr/bin/chromium, else Playwright's own).
+- scripts/publish_assets.sh stages the repo (cp only; this sandbox has no rsync). gh in an interactive shell can corrupt
+  it with colour queries: run gh with '< /dev/null | cat'.
