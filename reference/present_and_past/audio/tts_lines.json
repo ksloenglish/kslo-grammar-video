@@ -1,0 +1,164 @@
+[
+ {
+  "id": "L1_intro",
+  "text": "Hello, hello, K S Low students! It's me, Kayla, your grammar study buddy! Grammar can be tricky, but don't worry. We'll break it down together, step by step. Watch carefully, because there's a quick quiz at the end. Ready? Let's level up!",
+  "approved": "Hello, hello, K S Lo students! It's me, Kayla, your grammar study buddy! Grammar can be tricky, but don't worry. We'll break it down together, step by step. Watch carefully, because there's a quick quiz at the end. Ready? Let's level up!",
+  "style": "high pitch, bubbly, playful and energetic"
+ },
+ {
+  "id": "L2_transition",
+  "text": "Nice one! Now, let's move on to the next part!",
+  "approved": "Nice one! Now, let's move on to the next part!",
+  "style": "high pitch, bubbly, playful and energetic"
+ },
+ {
+  "id": "L3_outro",
+  "text": "Great work today, K S Low students! Keep practising, and try using this grammar in your own writing and speaking. See you next time! Bye-bye!",
+  "approved": "Great work today, K S Lo students! Keep practising, and try using this grammar in your own writing and speaking. See you next time! Bye-bye!",
+  "style": "high pitch, bubbly, playful and energetic"
+ },
+ {
+  "id": "SH",
+  "text": "Look! Is, red, was, reaches, gives... Present, past, then present again! Is that allowed? Let's find out!",
+  "approved": "Look! Is, read, was, reaches, gives... Present, past, then present again! Is that allowed? Let's find out!",
+  "style": "high pitch, bubbly, playful and energetic; clear and unhurried"
+ },
+ {
+  "id": "SM",
+  "text": "Here's our Tense Map. Yellow is simple: facts, habits and finished actions. Pink is continuous: actions in progress. Let's unlock them!",
+  "approved": "Here's our Tense Map. Yellow is simple: facts, habits and finished actions. Pink is continuous: actions in progress. Let's unlock them!",
+  "style": "high pitch, bubbly, playful and energetic; clear and unhurried"
+ },
+ {
+  "id": "S1_0",
+  "text": "Level one: the present!",
+  "approved": "Level one: the present!",
+  "style": "high pitch, bubbly, playful and energetic"
+ },
+ {
+  "id": "S1_1",
+  "text": "The simple present uses the basic verb. With he, she or it, add an s. She plays!",
+  "approved": "The simple present uses the basic verb. With he, she or it, add an s. She plays!",
+  "style": "high pitch, bubbly, playful and energetic; clear and unhurried"
+ },
+ {
+  "id": "S1_2",
+  "text": "Use it for facts. Water freezes at zero degrees Celsius. Things that are true now. I live in Ching Yee. And habits. Richard wakes up at seven a.m. every day.",
+  "approved": "Use it for facts. Water freezes at zero degrees Celsius. Things that are true now. I live in Tsing Yi. And habits. Richard wakes up at seven a.m. every day.",
+  "style": "high pitch, bubbly, playful and energetic; clear and unhurried"
+ },
+ {
+  "id": "S1_3",
+  "text": "The present continuous: am, is or are, plus ing. It has five uses. Give me five! One: right now. Look! Snow is falling. Two: temporary situations. I am learning to swim at present. Three: changing trends. House husbands are becoming more popular. Four: photos. Everyone is smiling happily in the photo. Five: annoying habits, with always. He is always complaining about his job!",
+  "approved": "The present continuous: am, is or are, plus -ing. It has five uses. Give me five! One: right now. Look! Snow is falling. Two: temporary situations. I am learning to swim at present. Three: changing trends. House husbands are becoming more popular. Four: photos. Everyone is smiling happily in the photo. Five: annoying habits, with always. He is always complaining about his job!",
+  "style": "high pitch, bubbly, playful and energetic; clear and unhurried"
+ },
+ {
+  "id": "S2_0",
+  "text": "Level two: the past!",
+  "approved": "Level two: the past!",
+  "style": "high pitch, bubbly, playful and energetic"
+ },
+ {
+  "id": "S2_1",
+  "text": "The simple past is for finished actions. Most verbs add ed, but some are irregular. I was born in twenty thirteen. A fire broke out in my building yesterday.",
+  "approved": "The simple past is for finished actions. Most verbs add -ed, but some are irregular. I was born in 2013. A fire broke out in my building yesterday.",
+  "style": "high pitch, bubbly, playful and energetic; clear and unhurried"
+ },
+ {
+  "id": "S2_2",
+  "text": "The past continuous: was or were, plus ing. Use it for an action in progress at a past time. We were having a barbecue at four o'clock yesterday. For a long action interrupted by a short one. She was waiting for the bus when it suddenly rained. And for two actions at the same time. Fred was watching TV while his mum was preparing dinner.",
+  "approved": "The past continuous: was or were, plus -ing. Use it for an action in progress at a past time. We were having a barbecue at four o'clock yesterday. For a long action interrupted by a short one. She was waiting for the bus when it suddenly rained. And for two actions at the same time. Fred was watching TV while his mum was preparing dinner.",
+  "style": "high pitch, bubbly, playful and energetic; clear and unhurried"
+ },
+ {
+  "id": "S3_0",
+  "text": "Level three: non-action verbs!",
+  "approved": "Level three: non-action verbs!",
+  "style": "high pitch, bubbly, playful and energetic"
+ },
+ {
+  "id": "S3_1",
+  "text": "Non-action verbs describe feelings, opinions or states. We don't usually use them with ing. Like, want, think, know, see, smell and have.",
+  "approved": "Non-action verbs describe feelings, opinions or states. We don't usually use them with -ing. Like, want, think, know, see, smell and have.",
+  "style": "high pitch, bubbly, playful and energetic; clear and unhurried"
+ },
+ {
+  "id": "S3_2",
+  "text": "I think game shows are exciting. Not I am thinking! Mike has one brother and one sister. Not Mike is having!",
+  "approved": "I think game shows are exciting. Not I am thinking! Mike has one brother and one sister. Not Mike is having!",
+  "style": "high pitch, bubbly, playful and energetic; clear and unhurried"
+ },
+ {
+  "id": "S3_3",
+  "text": "Plot twist! Some of these verbs can take ing when they're actions. What is she thinking now? That's the action of thinking. We were having dinner at a Japanese restaurant. Here, having means eating!",
+  "approved": "Plot twist! Some of these verbs can take -ing when they're actions. What is she thinking now? That's the action of thinking. We were having dinner at a Japanese restaurant. Here, having means eating!",
+  "style": "high pitch, bubbly, playful and energetic; clear and unhurried"
+ },
+ {
+  "id": "S4_0",
+  "text": "Level four: tenses in stories!",
+  "approved": "Level four: tenses in stories!",
+  "style": "high pitch, bubbly, playful and energetic"
+ },
+ {
+  "id": "S4_1",
+  "text": "Stories that happened in the past usually use past tenses. Once upon a time, there was a beautiful princess who had a kind heart...",
+  "approved": "Stories that happened in the past usually use past tenses. Once upon a time, there was a beautiful princess who had a kind heart...",
+  "style": "high pitch, bubbly, playful and energetic; clear and unhurried"
+ },
+ {
+  "id": "S4_2",
+  "text": "But in a synopsis, a short summary of a film, play or book, or when we retell a story, we often use present tenses. It's more dramatic! Dora and Sam are resting on the beach when suddenly, they spot a shark!",
+  "approved": "But in a synopsis, a short summary of a film, play or book, or when we retell a story, we often use present tenses. It's more dramatic! Dora and Sam are resting on the beach when suddenly, they spot a shark!",
+  "style": "high pitch, bubbly, playful and energetic; clear and unhurried"
+ },
+ {
+  "id": "S4_3",
+  "text": "Careful! Real-world facts stay in the past. The film was a big hit when it came out in two thousand and eight. In the film, Harry the superhero saves thousands of lives.",
+  "approved": "Careful! Real-world facts stay in the past. The film was a big hit when it came out in 2008. In the film, Harry the superhero saves thousands of lives.",
+  "style": "high pitch, bubbly, playful and energetic; clear and unhurried"
+ },
+ {
+  "id": "S4_4",
+  "text": "Back to Snow White! Is: true now. Red and was: finished. Reaches, gives, saves and liv: the story, told in the present. Every tense has a reason!",
+  "approved": "Back to Snow White! Is: true now. Read and was: finished. Reaches, gives, saves and live: the story, told in the present. Every tense has a reason!",
+  "style": "high pitch, bubbly, playful and energetic; clear and unhurried"
+ },
+ {
+  "id": "SQ0",
+  "text": "Boss quiz! Say your answers out loud!",
+  "approved": "Boss quiz! Say your answers out loud!",
+  "style": "high pitch, bubbly, playful and energetic"
+ },
+ {
+  "id": "SQ1",
+  "text": "Is sleeping! It's happening right now.",
+  "approved": "Is sleeping! It's happening right now.",
+  "style": "high pitch, bubbly, playful and energetic"
+ },
+ {
+  "id": "SQ2",
+  "text": "Was doing! A long action, interrupted.",
+  "approved": "Was doing! A long action, interrupted.",
+  "style": "high pitch, bubbly, playful and energetic"
+ },
+ {
+  "id": "SQ3",
+  "text": "Want! It's a non-action verb, so no ing.",
+  "approved": "Want! It's a non-action verb, so no -ing.",
+  "style": "high pitch, bubbly, playful and energetic"
+ },
+ {
+  "id": "SQ4",
+  "text": "Flies! In a synopsis, we use the present.",
+  "approved": "Flies! In a synopsis, we use the present.",
+  "style": "high pitch, bubbly, playful and energetic"
+ },
+ {
+  "id": "SC",
+  "text": "Here's your cheat sheet. Pause the video and take a screenshot!",
+  "approved": "Here's your cheat sheet. Pause the video and take a screenshot!",
+  "style": "high pitch, bubbly, playful and energetic; clear and unhurried"
+ }
+]

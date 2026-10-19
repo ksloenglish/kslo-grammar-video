@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+@font-face { font-family: "Fredoka"; src: url("../fonts/Fredoka.ttf"); font-weight: 300 700; }
+@font-face { font-family: "Nunito"; src: url("../fonts/Nunito.ttf"); font-weight: 200 1000; }
+html, body { margin: 0; width: 1920px; height: 1080px; background: transparent; overflow: hidden; }
+body { -webkit-font-smoothing: antialiased; text-rendering: geometricPrecision; }
+#stage { position: absolute; inset: 0; }
+.mask { position: absolute; overflow: hidden; padding: 0.10em 0.04em 0.18em; margin: -0.10em -0.04em -0.18em; }
+.inner { display: block; white-space: nowrap; will-change: transform; }
+.sent { position: absolute; white-space: nowrap; font-family: "Nunito"; font-weight: 800; color: #fff; line-height: 1.25; }
+.wm { display: inline-block; overflow: hidden; vertical-align: top; padding: 0 0.03em 0.16em; margin: 0 -0.03em -0.16em; }
+.wi { display: inline-block; will-change: transform; }
+.hl { position: relative; display: inline-block; isolation: isolate; margin: 0 0.07em; }
+.mk { position: absolute; left: -0.09em; right: -0.09em; top: 0.17em; bottom: 0.05em; border-radius: 0.2em; z-index: -1;
+      transform-origin: left center; }
+.label { font-family: "Nunito"; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; }
+.num { font-family: "Fredoka"; font-weight: 600; font-feature-settings: "tnum" 1; }
+.tok { position: absolute; display: flex; align-items: center; height: 52px; padding: 0 22px; box-sizing: border-box;
+       border-radius: 14px; font-family: "Nunito"; font-weight: 800; font-size: 30px; white-space: nowrap; color: #fff; }
+.bar { position: absolute; height: 22px; border-radius: 11px; background: #FF4FA8; box-shadow: 0 0 18px rgba(255,79,168,0.55); }
+.small { position: absolute; white-space: nowrap; font-family: "Nunito"; font-weight: 700; font-size: 22px; color: #CDC3F0; line-height: 1; }
+.cap { font-family: "Nunito"; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; font-size: 18px; }
+</style>
+</head>
+<body>
+<div id="stage"></div>
+<script src="lib.js"></script>
+<script>
+"use strict";
+// shell.html?s=<SID> loads scenes/<SID>.js, which must define window.init(cues) and window.seek(t).
+window.SID = new URLSearchParams(location.search).get("s");
+const _F = new URLSearchParams(location.search).get("f") || window.SID;     // template file (e.g. _quiz for Q1-Q4)
+window.loaded = new Promise(res => {
+  const sc = document.createElement("script");
+  sc.src = `scenes/${_F}.js`;
+  sc.onload = () => window.ready.then(ok => res(!ok ? "fonts not loaded"
+    : (typeof window.init === "function" && typeof window.seek === "function") ? true : "init/seek missing"));
+  sc.onerror = () => res(`scenes/${_F}.js failed to load`);
+  document.body.appendChild(sc);
+});
+</script>
+</body>
+</html>

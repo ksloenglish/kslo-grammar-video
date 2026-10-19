@@ -1,0 +1,76 @@
+{
+ "mouth_half": {
+  "matches": 428,
+  "inliers": 176,
+  "scale": 0.9921,
+  "tx": 8.9,
+  "ty": 7.6
+ },
+ "mouth_open": {
+  "matches": 413,
+  "inliers": 169,
+  "scale": 0.9932,
+  "tx": 7.4,
+  "ty": 5.1
+ },
+ "blink": {
+  "matches": 430,
+  "inliers": 177,
+  "scale": 0.9917,
+  "tx": 8.6,
+  "ty": 6.3
+ },
+ "wink": {
+  "matches": 435,
+  "inliers": 173,
+  "scale": 0.9922,
+  "tx": 9.2,
+  "ty": 3.4
+ },
+ "surprised": {
+  "matches": 420,
+  "inliers": 172,
+  "scale": 0.992,
+  "tx": 8.7,
+  "ty": 6.1
+ },
+ "thinking": {
+  "matches": 298,
+  "inliers": 121,
+  "scale": 0.9919,
+  "tx": 9.4,
+  "ty": 7.9
+ },
+ "crop": [
+  525,
+  0,
+  1939,
+  1440
+ ],
+ "patches": {
+  "mouth_half": [
+   675,
+   347
+  ],
+  "mouth_open": [
+   675,
+   347
+  ],
+  "mouth_o": [
+   675,
+   347
+  ],
+  "eyes_blink": [
+   574,
+   222
+  ],
+  "eyes_wink": [
+   724,
+   222
+  ],
+  "eyes_surprised": [
+   574,
+   222
+  ]
+ }
+}

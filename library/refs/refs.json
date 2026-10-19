@@ -1,0 +1,17 @@
+{
+ "intro": {
+  "src": "L1_intro_C",
+  "voice": 14.82,
+  "dur": 17
+ },
+ "transition": {
+  "src": "L2_transition",
+  "voice": 2.46,
+  "dur": 4
+ },
+ "outro": {
+  "src": "L3_outro_D",
+  "voice": 8.64,
+  "dur": 10
+ }
+}
