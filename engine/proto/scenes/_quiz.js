@@ -9,21 +9,21 @@
     .quiz-blank { display:inline-block; position:relative; height:48px; vertical-align:baseline; }
     .quiz-blankline { position:absolute; left:0; right:0; bottom:-22px; height:4px; border-radius:2px; background:#fff; transform-origin:left center; }
     .quiz-answer-canvas { position:absolute; pointer-events:none; }
-    .quiz-count { position:absolute; width:138px; height:138px; border-radius:50%; box-sizing:border-box; border:2px solid rgba(255,217,61,.78);
-      background:rgba(255,217,61,.10); box-shadow:0 0 25px rgba(255,217,61,.18), inset 0 0 18px rgba(255,217,61,.07); transform-origin:center; }
+    .quiz-count { position:absolute; width:168px; height:168px; border-radius:50%; box-sizing:border-box;
+      background:radial-gradient(circle at 50% 34%, #3E2388 0%, #23104F 100%); box-shadow:0 0 34px rgba(255,217,61,.30), inset 0 2px 0 rgba(255,255,255,.12); transform-origin:center; }
     .quiz-count canvas { position:absolute; inset:0; }
     .quiz-answer-row { position:absolute; left:90px; min-height:74px; display:flex; align-items:center; gap:16px; transform-origin:left center; }
-    .quiz-pill { height:74px; padding:0 27px; box-sizing:border-box; display:flex; align-items:center; border-radius:37px; white-space:nowrap;
-      font:800 46px/1 "Nunito"; }
+    .quiz-pill { height:86px; padding:0 32px; box-sizing:border-box; display:flex; align-items:center; border-radius:43px; white-space:nowrap;
+      font:800 54px/1 "Nunito"; }
     .quiz-correct { color:#281450; box-shadow:0 0 19px rgba(255,217,61,.18); }
     .quiz-wrong { position:relative; color:#CDC3F0; background:rgba(205,195,240,.15); border:2px solid rgba(205,195,240,.24); }
     .quiz-strike { position:absolute; left:16px; right:16px; height:5px; border-radius:3px; background:#FF5468; box-shadow:0 0 9px rgba(255,84,104,.55); transform-origin:left center; }
-    .quiz-tick { position:relative; width:62px; height:62px; border-radius:50%; background:#5CF2B0; flex:0 0 62px; }
-    .quiz-tags { position:absolute; left:90px; width:670px; display:flex; flex-wrap:wrap; align-items:flex-start; gap:12px; transform-origin:left top; }
-    .quiz-tag { height:46px; padding:0 17px; box-sizing:border-box; border-radius:23px; display:flex; align-items:center; gap:7px; white-space:nowrap;
-      color:#2EE6FF; border:1.5px solid rgba(46,230,255,.62); background:rgba(46,230,255,.09); font:800 20px/1 "Nunito"; }
+    .quiz-tick { position:relative; width:72px; height:72px; border-radius:50%; background:#5CF2B0; flex:0 0 72px; box-shadow:0 0 18px rgba(92,242,176,.45); }
+    .quiz-tags { position:absolute; left:90px; width:690px; display:flex; flex-wrap:wrap; align-items:flex-start; gap:14px; transform-origin:left top; }
+    .quiz-tag { height:54px; padding:0 21px; box-sizing:border-box; border-radius:27px; display:flex; align-items:center; gap:8px; white-space:nowrap;
+      color:#2EE6FF; border:1.5px solid rgba(46,230,255,.62); background:rgba(46,230,255,.09); font:800 24px/1 "Nunito"; }
     .quiz-tag.grammar { color:#C0A6FF; border-color:rgba(192,166,255,.62); background:rgba(192,166,255,.09); }
-    .quiz-tag svg { width:19px; height:19px; flex:0 0 19px; }
+    .quiz-tag svg { width:22px; height:22px; flex:0 0 22px; }
   </style>`);
 
   // Exact old calls: (n, voice, q, ph, ans, acol, tags, cue2). grammarTags are additive context labels required for recap surfaces.
@@ -41,23 +41,15 @@
     return { ctx, m: ctx.measureText(text) };
   }
   // Canvas placement centres the actual rendered ink, not the glyph's advance box. This fixes the narrow '1'.
+  // Old bug: x = cx - (left + right) / 2 pushed a '1' ~5 px right. inkGlyph centres the ink box, then corrects optically.
   function drawCountdownDigit(cv, digit) {
-    const ctx = cv.getContext("2d"), W = cv.width, H = cv.height;
-    ctx.clearRect(0, 0, W, H);
-    ctx.font = "600 64px Fredoka";
-    ctx.fillStyle = "#FFD93D";
-    ctx.textBaseline = "alphabetic";
-    const m = ctx.measureText(String(digit));
-    const cx = W / 2, cy = H / 2;
-    const x = cx - (m.actualBoundingBoxLeft + m.actualBoundingBoxRight) / 2;
-    const y = cy + (m.actualBoundingBoxAscent - m.actualBoundingBoxDescent) / 2;
-    ctx.fillText(String(digit), x, y);
+    inkGlyph(cv, String(digit), `600 ${Math.round(cv.height * 0.6)}px Fredoka`, "#FFD93D", 0.6, "rgba(255,217,61,.55)");
   }
   function makeTag(text, kind, parent) {
     const tag = el("div", `quiz-tag ${kind || ""}`, {}, parent);
     if (text === "fly → flies") {
       const a = el("span", null, {}, tag); a.textContent = "fly";
-      const ar = icon("arrow", 0, 0, 19, "#2EE6FF", "#2EE6FF", tag, 4.3);
+      const ar = icon("arrow", 0, 0, 22, "#2EE6FF", "#2EE6FF", tag, 4.3);
       ar.s.style.position = "relative"; ar.s.style.left = "0"; ar.s.style.top = "0";
       const b = el("span", null, {}, tag); b.textContent = "flies";
       return { tag, arrow: ar };
@@ -89,9 +81,17 @@
     ac.font = "800 68px Nunito"; ac.fillStyle = d.acol; ac.textBaseline = "alphabetic";
     ac.fillText(d.ans, 4, 4 + am.actualBoundingBoxAscent);
 
+    // Countdown timer disc (168 px, centre x 434): faint track + yellow arc that runs down while the digit shows.
+    const CD = 168, CR = 72, CC = 2 * Math.PI * CR;
     const count = [3, 2, 1].map(digit => {
-      const outer = el("div", "quiz-count", { left:"365px", top:"458px" }, root);
-      const cv = el("canvas", null, {}, outer); cv.width = 138; cv.height = 138; drawCountdownDigit(cv, digit);
+      const outer = el("div", "quiz-count", { left:`${434 - CD / 2}px`, top:"458px" }, root);
+      outer.innerHTML = `<svg width="${CD}" height="${CD}" viewBox="0 0 ${CD} ${CD}" style="position:absolute;left:0;top:0;overflow:visible">
+        <circle cx="${CD / 2}" cy="${CD / 2}" r="${CR}" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="10"/>
+        <circle class="arc" cx="${CD / 2}" cy="${CD / 2}" r="${CR}" fill="none" stroke="#FFD93D" stroke-width="10" stroke-linecap="round"
+          stroke-dasharray="${CC.toFixed(2)}" stroke-dashoffset="0" transform="rotate(-90 ${CD / 2} ${CD / 2})" style="filter:drop-shadow(0 0 7px rgba(255,217,61,.75))"/></svg>`;
+      const cv = el("canvas", null, { position:"absolute", left:"0", top:"0", width:`${CD}px`, height:`${CD}px` }, outer);
+      cv.width = CD * 2; cv.height = CD * 2; drawCountdownDigit(cv, digit);
+      outer.arc = outer.querySelector(".arc"); outer.CC = CC;
       return outer;
     });
 
@@ -101,13 +101,13 @@
       wrong = el("div", "quiz-pill quiz-wrong", {}, answerRow); wrong.textContent = d.wrong;
       strike = el("div", "quiz-strike", {}, wrong);
       // Measure x-height to place the stroke through it, rather than through descenders.
-      const fm = fontMetrics("800 46px Nunito", d.wrong).m, xm = fontMetrics("800 46px Nunito", "x").m;
-      const baseline = 37 + (fm.actualBoundingBoxAscent - fm.actualBoundingBoxDescent) / 2;
+      const fm = fontMetrics("800 54px Nunito", d.wrong).m, xm = fontMetrics("800 54px Nunito", "x").m;
+      const baseline = 43 + (fm.actualBoundingBoxAscent - fm.actualBoundingBoxDescent) / 2;
       strike.style.top = `${baseline - xm.actualBoundingBoxAscent / 2}px`;
     }
     const correct = el("div", "quiz-pill quiz-correct", { background:d.acol }, answerRow); correct.textContent = d.ans;
     const tickWrap = el("div", "quiz-tick", {}, answerRow);
-    const tick = icon("tick", 7, 7, 48, "#281450", "#281450", tickWrap, 4.8);
+    const tick = icon("tick", 8, 8, 56, "#281450", "#281450", tickWrap, 4.8);
 
     const tags = el("div", "quiz-tags", {}, root);
     const tagEntries = [...d.grammarTags.map(x => makeTag(x, "grammar", tags)), ...d.tags.map(x => makeTag(x, "", tags))];
@@ -119,7 +119,7 @@
     const cdTop = Math.max(458, Math.ceil(qr.bottom + 44));   // countdown always clear of the question text
     count.forEach(o => (o.style.top = `${cdTop}px`));
     answerRow.style.top = `${answerY}px`;
-    tags.style.top = `${answerY + 94}px`;
+    tags.style.top = `${answerY + 108}px`;
 
     S = { cues, d, root, chip, q, blank, line, answerCanvas, count, answerRow, wrong, strike, correct, tickWrap, tick, tags, tagEntries };
     fx(0.10, "whoosh", 0.4);
@@ -143,6 +143,7 @@
       const pout = ease.inCubic(prog(t, t0 + 0.66, 0.18));
       n.style.opacity = clamp(pin) * (1 - pout);
       n.style.transform = `scale(${Math.max(0, pin)})`;
+      n.arc.setAttribute("stroke-dashoffset", (n.CC * ease.inOutCubic(prog(t, t0 + 0.08, 0.76))).toFixed(2));
     });
 
     const revealP = ease.outBack(prog(t, c.lead, 0.34));

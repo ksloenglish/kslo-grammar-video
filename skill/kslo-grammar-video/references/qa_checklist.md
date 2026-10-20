@@ -92,7 +92,11 @@ cd "$P"
 mkdir -p build/qa
 ffmpeg -y -v error -i output/Kayla_Grammar_Lab_The_present_and_the_past.mp4 \
   -vn -ac 1 -ar 16000 build/qa/final_audio.wav
+rm -f build/qa/final_audio_fw_words.json      # CACHED transcript B: delete after EVERY render or B is stale
 manus-speech-to-text build/qa/final_audio.wav
+# Outro clip captions need their own ASR crop starting at L3 t0 + 6.13 s (captions.py reads bye_transcription_*.json)
+OFF=$(python3 -c "import json;print([d for d in json.load(open('build/timeline.json')) if d['sid']=='L3'][0]['t0']+6.13)")
+ffmpeg -y -v error -ss $OFF -i build/qa/final_audio.wav -t 3.6 build/qa/bye.wav && manus-speech-to-text build/qa/bye.wav
 python3 scripts/captions.py
 python3 scripts/verify_transcript.py
 
@@ -122,3 +126,18 @@ ffmpeg -v info -sseof -0.7 -i output/Kayla_Grammar_Lab_The_present_and_the_past.
 - [ ] Final MP4, `.en.srt`, `.zh-HK.srt` and `YouTube_text.md` are current and correspond to the final timeline.
 - [ ] YouTube title/description use the actual title, final chapter times, real grammar-point list, caption notice and appropriate tags. They do not mention AI, Manus or generation.
 - [ ] Record the exact render/version, changed SIDs, QA evidence and unresolved caveats in `NOTES.md` before context is compacted or the project is handed over.
+
+## Known benign log lines and revision evidence (added round 13)
+- Three `Broken pipe` / `Error muxing a packet` lines after the clip scenes are the library-clip decoder being closed
+  once enough frames are read; they appear in every accepted render. Any other error or Traceback fails the build.
+- After a revision render, compare SRTs with `_vN`: only the ASR-timed clip cues may move (≤ 50 ms). Check the
+  changed animation in the **encoded** MP4 (e.g. a 0.1 s crop strip of a token hand-over), not only stills.
+- Give the teacher one labelled overview image (one encoded frame per requested change, numbered as in the request)
+  with the MP4 and SRT links.
+
+## Glyph-centring and focal-signal checks (added round 13)
+- Countdown digits and any single glyph in a disc: measure ink box and centre of mass in the rendered PNG; box/mass
+  within ±4 px horizontally of the disc centre, vertical ≤ 1 px.
+- A key signal (question mark, tick, warning) must be a solid badge/token readable at a glance in a 960 px thumbnail.
+- Adjoining formula chips: zero visible gap at full resolution.
+- Every icon checked at full resolution for broken paths; prefer MIT catalogue badges.

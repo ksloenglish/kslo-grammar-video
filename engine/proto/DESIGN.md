@@ -112,3 +112,11 @@ images, e.g. PNGs made from render/hand.py). Do not run `build.py audio`, `mux` 
 ## 6. Report (final answer)
 Per scene: one-paragraph design summary; cue words used; SFX list; hold requested; any wording deviations; paths of
 3 representative full-frame stills; known issues. Keep it concise.
+
+## Round 13 additions
+- Focal signals are solid tokens: `qToken()` for '?', mint disc + tick for done. Never a thin outline icon.
+- Single glyphs in circles use `inkGlyph()` (ink-box centring + optical mass correction), never advance-box centring.
+- Icons: use `badge(name, …)` from the MIT catalogue (`icons.js`, built by `scripts/build_icons.py` from Phosphor v2.1.1
+  and Fluent Emoji shark). No hand-drawn icon paths for featured objects.
+- Dock compound chips by measured width minus the shared border. Measure card padding by visible ink (≥ 30 px).
+- A lone short example in a large empty area is scaled up to fill the free band.

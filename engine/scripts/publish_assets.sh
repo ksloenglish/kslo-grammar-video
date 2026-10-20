@@ -27,6 +27,9 @@ cp -a "$P"/design/expr/*.png "$R/character/expressions/"
 [ -f "$P/output/Kayla_design_options.jpg" ] && cp_ "$P/output/Kayla_design_options.jpg" "$R/character/design_options_A_B_C.jpg"
 rsync_ "$P/sprites/" "$R/sprites/"
 mkdir -p "$R/design"; rsync_ "$P/design/icons/" "$R/design/icons/"; cp_ "$P/design/icons_sheet.png" "$R/design/icons_sheet.png"
+# MIT icon catalogue sources for proto/icons.js (scripts/build_icons.py) + licence notice
+rsync_ "$P/design/phosphor/" "$R/design/phosphor/"; rsync_ "$P/design/phosphor_bold/" "$R/design/phosphor_bold/"
+cp -a "$P"/design/fluent_*.svg "$R/design/"; cp_ "$P/design/ICON_LICENCES.md" "$R/design/ICON_LICENCES.md"
 
 # --- reusable Kayla library clips (Seedance 2.5, generated once; NEVER regenerate per topic)
 mkdir -p "$R/library/clips" "$R/library/source_clips" "$R/library/refs"
@@ -51,7 +54,7 @@ rsync_ "$P/fonts/" "$R/fonts/"
 # --- engine (code only)
 rsync_ "$P/render/" "$R/engine/render/"; rm -f "$R/engine/render/hand_v3_blur.py"
 mkdir -p "$R/engine/proto"
-for f in lib.js shell.html layer.py DESIGN.md RESEARCH.md; do cp_ "$P/proto/$f" "$R/engine/proto/$f"; done
+for f in lib.js icons.js shell.html layer.py DESIGN.md RESEARCH.md; do cp_ "$P/proto/$f" "$R/engine/proto/$f"; done
 rsync_ "$P/proto/scenes/" "$R/engine/proto/scenes/"
 rsync_ "$P/proto/holds/"  "$R/engine/proto/holds/"
 rsync_ "$P/proto/assets/" "$R/engine/proto/assets/"

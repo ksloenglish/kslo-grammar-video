@@ -94,6 +94,59 @@ function drawIcon(ic, p) {                            // outlines draw on, then 
     e.style.strokeDashoffset = `${len * (1 - q)}`;
   });
 }
+// ---------------------------------------------------------------- badge icons: Phosphor duotone (icons.js PH) in a tinted tile
+function rgba(hex, a) { const v = [1, 3, 5].map(i => parseInt(hex.slice(i, i + 2), 16)); return `rgba(${v.join(",")},${a})`; }
+function badge(name, x, y, size, col, parent = stage, round = false) {
+  const b = el("div", null, { position: "absolute", left: x + "px", top: y + "px", width: size + "px", height: size + "px",
+    boxSizing: "border-box", borderRadius: round ? "50%" : Math.round(size * 0.28) + "px", border: `2px solid ${rgba(col, 0.55)}`,
+    background: `linear-gradient(150deg, ${rgba(col, 0.24)}, ${rgba(col, 0.07)})`,
+    boxShadow: `0 0 ${Math.round(size * 0.28)}px ${rgba(col, 0.30)}, inset 0 1px 0 rgba(255,255,255,0.14)`,
+    display: "flex", alignItems: "center", justifyContent: "center", color: col, opacity: 0 }, parent);
+  const s = Math.round(size * 0.64);
+  b.innerHTML = `<svg viewBox="0 0 256 256" width="${s}" height="${s}" fill="currentColor" style="overflow:visible;` +
+    `filter:drop-shadow(0 0 ${Math.max(3, Math.round(size * 0.06))}px ${rgba(col, 0.6)})">${PH[name]}</svg>`;
+  return b;
+}
+function popBadge(b, t, t0, d = 0.5) {                // fade + overshoot scale from 0.55
+  const p = ease.outBack(prog(t, t0, d));
+  b.style.opacity = clamp(prog(t, t0, 0.14));
+  b.style.transform = `scale(${lerp(0.55, 1, Math.max(0, p))})`;
+}
+// ---------------------------------------------------------------- ink-centred glyphs (countdown digits, ? token)
+// Centres the rendered INK box on the canvas (x = cx - (right - left) / 2), then moves `optical` of the way towards the
+// ink's centre of mass so a flagged '1' sits visually centred.
+function inkGlyph(cv, ch, font, fill, optical = 0.6, glow = null) {
+  const ctx = cv.getContext("2d"), W = cv.width, H = cv.height;
+  ctx.font = font; ctx.textBaseline = "alphabetic"; ctx.textAlign = "left"; ctx.fillStyle = fill;
+  const m = ctx.measureText(ch);
+  const x = W / 2 - (m.actualBoundingBoxRight - m.actualBoundingBoxLeft) / 2;
+  const y = H / 2 + (m.actualBoundingBoxAscent - m.actualBoundingBoxDescent) / 2;
+  ctx.clearRect(0, 0, W, H); ctx.fillText(ch, x, y);
+  const px = ctx.getImageData(0, 0, W, H).data; let sx = 0, sa = 0;
+  for (let i = 3; i < px.length; i += 4) if (px[i]) { sx += ((i >> 2) % W) * px[i]; sa += px[i]; }
+  const dx = sa ? (W / 2 - sx / sa) * optical : 0;
+  ctx.clearRect(0, 0, W, H);
+  if (glow) { ctx.shadowColor = glow; ctx.shadowBlur = Math.round(H * 0.11); }
+  ctx.fillText(ch, x + dx, y);
+  return dx;
+}
+// Bold yellow '?' token (same footprint as the mint finish dot in 4.4): centre (cx, cy), diameter d.
+function qToken(cx, cy, d = 126, parent = stage) {
+  const q = el("div", null, { position: "absolute", left: (cx - d / 2) + "px", top: (cy - d / 2) + "px", width: d + "px", height: d + "px",
+    borderRadius: "50%", background: "radial-gradient(circle at 36% 30%, #FFF2A6 0%, #FFD93D 52%, #F4AE22 100%)",
+    boxShadow: `0 0 ${Math.round(d * 0.3)}px rgba(255,217,61,.62), inset 0 -${Math.round(d * 0.04)}px 0 rgba(150,80,0,.22), inset 0 2px 0 rgba(255,255,255,.55)`,
+    opacity: 0, transformOrigin: "50% 50%" }, parent);
+  const cv = el("canvas", null, { position: "absolute", left: "0", top: "0", width: d + "px", height: d + "px" }, q);
+  cv.width = d * 2; cv.height = d * 2;              // 2x for crisp edges
+  inkGlyph(cv, "?", `600 ${Math.round(d * 1.42)}px Fredoka`, "#281450", 0);
+  return q;
+}
+function animQToken(q, t, t0, out = null) {          // pop in, gentle puzzled wobble, optional shrink-out
+  const p = ease.outBack(prog(t, t0, 0.46)), o = out == null ? 0 : ease.inCubic(prog(t, out, 0.18));
+  q.style.opacity = clamp(prog(t, t0, 0.12)) * (1 - o);
+  const w = Math.sin((t - t0) * 3.1) * 7 * clamp(prog(t, t0 + 0.3, 0.4)), f = Math.sin((t - t0) * 2.2) * 4;
+  q.style.transform = `translateY(${f}px) rotate(${w}deg) scale(${Math.max(0, p) * (1 - 0.4 * o)})`;
+}
 // ---------------------------------------------------------------- sentences: word masks + highlighter groups
 // markup: plain words, {phrase|k} highlight group (k: v/y yellow, t cyan, p pink), "\n" = line break
 function sentence(src, x, y, size, parent = stage) {

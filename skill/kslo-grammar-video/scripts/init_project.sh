@@ -16,6 +16,8 @@ cp -a "$A/engine/scripts" "$P/scripts"
 cp -a "$A"/engine/proto/* "$P/proto/"                        # lib.js shell.html layer.py DESIGN.md scenes/ holds/ assets/
 cp -a "$A/fonts" "$P/fonts"; cp -a "$A/sprites" "$P/sprites"; cp -a "$A/brand" "$P/brand"
 cp -a "$A/design/icons" "$P/design/icons"; cp -a "$A/design/icons_sheet.png" "$P/design/"
+cp -a "$A/design/phosphor" "$A/design/phosphor_bold" "$A/design/ICON_LICENCES.md" "$P/design/"   # MIT icon sources
+cp -a "$A"/design/fluent_*.svg "$P/design/"
 cp -a "$A/character/kayla_keyframe_green.png" "$A/character/kayla_avatar_base.png" "$P/design/"
 cp -a "$A/character/kayla_master_design_A_neon_pop.png" "$P/design/kayla_A_neon_pop.png"
 cp -a "$A/character/expressions" "$P/design/expr"

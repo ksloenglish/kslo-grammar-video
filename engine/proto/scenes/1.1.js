@@ -26,7 +26,7 @@ window.init=function(c){
   plus1.style.left=(L+sub1.getBoundingClientRect().width+28)+"px";verb1.style.left=(L+sub1.getBoundingClientRect().width+76)+"px";
   plus2.style.left=(L+sub2.getBoundingClientRect().width+28)+"px";verb2.style.left=(L+sub2.getBoundingClientRect().width+76)+"px";
   const endX=L+sub2.getBoundingClientRect().width+76+verb2.getBoundingClientRect().width+24;ending.style.left=endX+"px";
-  const ex=sentence("She play{s|v}.",L,734,68,content);ex.groups[0].host.style.margin="0";ex.groups[0].mk.style.left="-.04em";ex.groups[0].mk.style.right="-.04em";
+  const ex=sentence("She play{s|v}.",L,694,132,content);   // R13: enlarged from 68 px to fill the lower panelex.groups[0].host.style.margin="0";ex.groups[0].mk.style.left="-.04em";ex.groups[0].mk.style.right="-.04em";
   const sp=burst(L+sub2.getBoundingClientRect().width+76+verb2.getBoundingClientRect().width+76,510,content);
   S={c,pn,content,title,rule,sub1,plus1,verb1,sub2,plus2,verb2,ending,ex,sp,endX};
   fx(c.add+.5,"click",.8);fx(c.plays,"sparkle",.6);

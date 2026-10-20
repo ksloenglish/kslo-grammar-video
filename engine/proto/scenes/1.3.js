@@ -22,7 +22,7 @@ window.init=function(cues){
   const tokA=token("am / is / are",640,186,C.pink,"rgba(255,79,168,.10)",C.white,content);
   const plus=el("div","num",{position:"absolute",left:"798px",top:"184px",fontSize:"34px",lineHeight:"44px",color:"rgba(255,255,255,.72)"},content);plus.textContent="+";
   const tokV=token("verb",830,186,"rgba(255,255,255,.42)","rgba(255,255,255,.06)",C.white,content);
-  const tokI=token("-ing",914,186,C.pink,C.pink,C.ink,content);
+  const tokI=token("-ing",830+tokV.getBoundingClientRect().width-2,186,C.pink,C.pink,C.ink,content);   // R13: docked like 2.2 (shared 2 px border, no gap)
   const ct=counter(content), rule0=hrule(L,266,R-L,.18,content);
   // The approved hand art is deliberately reused verbatim, not redrawn in CSS/SVG.
   const bigHands=[], smallHands=[];

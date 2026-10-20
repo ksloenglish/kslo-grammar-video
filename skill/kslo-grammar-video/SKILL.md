@@ -61,17 +61,21 @@ content as described below and keep `$P/reference/` for consulting. Never edit t
    (`qa_checklist.md`, incl. `align_audit.py`). Show one batched gallery for teacher review **before the full render**.
    Any new visual direction gets a mockup first.
 6. **Render** as background work:
-   `cd render && nohup sh -c 'python3 build.py render && python3 build.py audio && python3 build.py mux' &`
+   `cd render && nohup sh -c 'python3 build.py render && STEMS=1 python3 build.py audio && python3 build.py mux' &`
    (about 10-15 min, 6 workers). For revisions, re-render only the changed SIDs (`build.py render <SID> ...`), then
    `audio` + `mux`.
 7. **QA and copy.** Run every gate in `qa_checklist.md`: encoded-frame spot checks, two transcriptions +
-   `verify_transcript.py`, black and silent ending, −16 LUFS. Then `captions.py` (EN + written Chinese zh-HK, same
+   `verify_transcript.py`, black and silent ending, −16 LUFS. Delete the cached `build/qa/final_audio_fw_words.json` and re-crop
+   `bye.wav` (L3 t0 + 6.13 s) after **every** render, or the checks run on stale audio. Then `captions.py` (EN + written Chinese zh-HK, same
    timings) and `youtube_text.py` (chapters from the final timeline; never mention AI/Manus).
 8. **Deliver** the MP4, both SRTs and `output/YouTube_text.md` as file links. Keep `NOTES.md` current throughout:
    decisions, chosen takes, defects/fixes, metrics, versions. It is the failsafe when context is compacted.
 9. **Record and publish** after acceptance. Add this production's defects and fixes to
    `references/corrections_log.md`. Run `scripts/publish_assets.sh`, push, create the release and sync the skill
    copy in the repo (`sharing_and_access.md`).
+10. **After any skill edit**, local changes are overwritten by the account's stored copy at the next message. Validate,
+    sync `skill/kslo-grammar-video/` in the public repo and the private vault (`kslo-skills-vault`), then deliver
+    `SKILL.md` so the owner can choose **Add to My Skills** / universal update.
 
 ## Revisions: what to re-run
 
@@ -84,7 +88,8 @@ content as described below and keep `$P/reference/` for consulting. Never edit t
 | Library clip glitch | `scripts/retime_clip.py` (fixed version) + `clip_qa.py`; Seedance only if unfixable | that clip scene, `audio`, `mux`, republish the clip |
 | YouTube copy only | `youtube_text.py` | no render |
 
-Keep the previous MP4 as `_vN` before replacing it.
+Keep the previous MP4 and SRTs as `_vN` before re-rendering. Deliver one labelled changes-overview image of encoded
+frames with the links. Publish an accepted revision as the next release tag; never overwrite an earlier release.
 
 ## Non-negotiables (most-repeated defects)
 
@@ -95,6 +100,8 @@ Keep the previous MP4 as `_vN` before replacing it.
 - Give at least 1.5 s of reading time after each list or tip. Rushed screens were the most frequent complaint.
 - Fade to complete black with silence at the end. Show the logo at start, body (header logo height = divider) and end,
   never with glow or backing.
+- Make focal signals solid (`qToken()` '?', mint tick disc), icons literal MIT `badge()`s, compound chips docked with no
+  gap, single glyphs ink-centred (`inkGlyph()`), and enlarge lone examples into empty space.
 - Use no Unicode symbols missing from the fonts (glyph check). Use British spelling and single quotes.
 - ASR and automated video analysis do not prove pronunciation or layout. Look at full-resolution frames and listen in
   context.

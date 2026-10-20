@@ -43,7 +43,7 @@ window.init=function(c){
   [[b1,s1,1],[b2,s2,2]].forEach(([b,s,k])=>{const w=s.width();if(w>BW-48)throw new Error("bubble text overflows: "+Math.round(w));const nb=bubble(94,s.top-42,BW,s.bottom-s.top+64,content);content.replaceChild(nb,b);if(k===1)b1f=nb;else b2f=nb;});
   const ts=[tag("TRUE NOW","#5CF2B0",content),tag("FINISHED","#FFA448",content),tag("FINISHED","#FFA448",content),tag("SYNOPSIS","#2EE6FF",content),tag("SYNOPSIS","#2EE6FF",content),tag("SYNOPSIS","#2EE6FF",content),tag("SYNOPSIS","#2EE6FF",content)];
   [s1.groups[0],s1.groups[1],s1.groups[2],s2.groups[0],s2.groups[1],s2.groups[2],s2.groups[3]].forEach((g,i)=>layTag(ts[i],g));
-  const q=icon("question",986,842,118,"#FFD93D","#FFD93D",content,4.6);q.s.style.filter="drop-shadow(0 0 13px rgba(255,217,61,.70))";
+  const q=qToken(1045,901,126,content);
   const dot=el("div","finish-dot",{left:"982px",top:"838px",width:"126px",height:"126px"},content);
   const tick=icon("tick",1013,869,64,"#281450","#281450",content,7.2);const sp=sparkle(1045,901,"#5CF2B0",content);
   S={c,pn,content,l1,b1:b1f,s1,l2,b2:b2f,s2,ts,q,dot,tick,sp};
@@ -58,7 +58,7 @@ window.seek=function(t){
   S.s1.groups.forEach((g,i)=>sweep(g,t,[c.true,c.finished,c.finished][i],.34));
   S.s2.groups.forEach((g,i)=>sweep(g,t,[c.reaches,c.gives,c.saves,c.live][i],.34));
   [c.true,c.finished,c.finished,c.reaches+.1,c.gives+.1,c.saves+.1,c.live+.1].forEach((tt,i)=>inTag(S.ts[i],t,tt));
-  const qOut=ease.inCubic(prog(t,c.every,.16));S.q.s.style.opacity=1-qOut;drawIcon(S.q,prog(t,-.02,.58));
+  animQToken(S.q,t,-.02,c.every);
   const done=ease.outBack(prog(t,c.every+.1,.42));S.dot.style.opacity=clamp(prog(t,c.every+.1,.10));S.dot.style.transform=`scale(${Math.max(0,done)})`;drawIcon(S.tick,prog(t,c.every+.15,.55));
   const burst=prog(t,c.every+.2,.65);S.sp.style.opacity=(burst>0&&burst<1?1-burst:0);S.sp.style.transform=`scale(${lerp(.30,1.15,ease.outCubic(burst))})`;
   exitLift(S.content,t);return true;

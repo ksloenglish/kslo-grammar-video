@@ -42,7 +42,7 @@ window.init=function(c){
   [[b1,s1,1],[b2,s2,2]].forEach(([b,s,k])=>{const w=s.width();if(w>BW-48)throw new Error("bubble text overflows: "+Math.round(w));const nb=bubble(94,s.top-42,BW,s.bottom-s.top+64,content);content.replaceChild(nb,b);if(k===1)b1f=nb;else b2f=nb;});
   const ts=[tag("PRESENT","#5CF2B0",content),tag("PAST","#FFA448",content),tag("PAST","#FFA448",content),tag("PRESENT","#5CF2B0",content),tag("PRESENT","#5CF2B0",content)];
   [s1.groups[0],s1.groups[1],s1.groups[2],s2.groups[0],s2.groups[1]].forEach((g,i)=>layTag(ts[i],g));
-  const q=icon("question",986,842,118,"#FFD93D","#FFD93D",content,4.6); q.s.style.filter="drop-shadow(0 0 13px rgba(255,217,61,.70))";
+  const q=qToken(1045,901,126,content);
   S={c,pn,content,l1,b1:b1f,s1,l2,b2:b2f,s2,ts,q};
   [c.is1,c.read,c.was,c.reaches,c.gives].forEach(t=>fx(t,"pop",.6)); fx(c.is2,"whoosh",.5);
   return {bubbleWidth:BW,textSize:34};
@@ -56,7 +56,7 @@ window.seek=function(t){
   S.s1.groups.forEach((g,i)=>sweep(g,t,[c.is1,c.read,c.was][i],.34));
   S.s2.groups.forEach((g,i)=>sweep(g,t,[c.reaches,c.gives,c.gives+99,c.gives+99][i],.34));
   [c.is1,c.read,c.was,c.reaches,c.gives].forEach((tt,i)=>inTag(S.ts[i],t,tt));
-  drawIcon(S.q,prog(t,c.is2-.05,.58));
+  animQToken(S.q,t,c.is2-.05);
   exitLift(S.content,t); return true;
 };
 })();

@@ -35,6 +35,8 @@ licence. Retain existing rights and notices.
    `git push`.
 4. Attach the MP4 and both SRTs to a new release:
    `gh release create <slug>-v1 -R ksloenglish/kslo-grammar-video --title "..." --notes "..." <mp4> <en.srt> <zh-HK.srt> < /dev/null | cat`
+   For an accepted revision, create the next tag (`<slug>-v2`, `-v3` …) with notes listing the changes. Never delete,
+   overwrite or re-upload assets of an earlier release; publish only after the teacher accepts the revision.
 5. Verify anonymously, e.g. `env -u GH_TOKEN -u GITHUB_TOKEN curl -sIL -o /dev/null -w "%{http_code}" <release URL>`.
 6. If the skill changed, copy the validated skill into `skill/kslo-grammar-video/` (exclude `__pycache__`), commit and
    push, and deliver the SKILL.md attachment so the owner can choose **Add to My Skills**. A local edit alone does not

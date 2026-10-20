@@ -49,6 +49,7 @@ Use only reusable generic library clips for a normal topic. Their spoken lines n
 | V3 | Make motion serve an explanation: cue visual events to the narration; use diagrams, timelines, formula tokens, comparison pairs and maps rather than decorative bullets. Use masked rises, word reveals, highlighter sweeps and restrained draw-on icons. No spins, wobbles, flashing, clip-art, emoji, rainbow gradients or WordArt. |
 | V4 | Draw arrows, ticks, crosses and numbered circles as SVG/shapes, not unsupported Unicode glyphs. Run glyph coverage checks for all visible strings. |
 | V5 | Use anti-aliased shapes. Keep the approved signed-distance-field 'Give me five' hand; do not replace it with separately stamped/blurred fingers. |
+| V6 | Make every focal signal **solid and prominent**: the hook/recap question mark is the yellow `qToken()` disc (bold navy '?', glow, gentle wobble) that hands over to the mint tick disc in the same spot; never a thin outline icon. Use literal, decent icons from the MIT catalogue as filled `badge()`s (Phosphor v2.1.1, Fluent Emoji shark); never hand-drawn SVG paths for a featured object (the clapperboard and shark were rejected). |
 
 ## Layout, clarity and reading time
 
@@ -57,12 +58,14 @@ Use only reusable generic library clips for a normal topic. Their spoken lines n
 | L1 | Follow the design grid. Standard panel: x=60 to 1170, y=130 to 1030; small: right edge 1400; large: teaching content x=90–760 because Kayla occupies the right. Keep content below the header zone and at least 40 px inside panel edges. |
 | L2 | Use one left alignment system. Align **visible ink**, not nominal Pillow/CSS boxes. Lines that belong together must align exactly; audit near-misses. |
 | L3 | Give text, labels and icons breathing space. Do not crowd panel edges, icon/card edges, the bottom of a panel, each other, or Kayla. Use at least 20 px type and no clipped/overflowing text. |
-| L4 | Vertically and optically centre text in every pill, chip, badge, circle and answer container, including narrow digits such as '1'. |
+| L4 | Vertically and optically centre text in every pill, chip, badge, circle and answer container, including narrow digits such as '1'. Centre single glyphs by **ink box** with `inkGlyph()` (60 % optical mass correction); verify in the rendered PNG. |
 | L5 | Assume viewers have **not read the grammar book**. Add short context labels for unexplained source material, signal-word chip rows and diagrams. Explain `when`/`while`, LONG/SHORT, or similarly non-obvious visual coding on screen. |
 | L6 | Highlight **only the intended grammar words**. Preserve word-level colour meaning; do not put a glow/highlight around an entire sentence where only a verb phrase is meant. |
 | L7 | Use a solid drawn blank line in every quiz; never underscores, dashes or a broken underline. Keep the answer on the measured baseline above the line and keep the countdown clear of multi-line question text. |
 | L8 | For a sequential 3+ row scene, use numbered rows/progress rail and focus dimming. When the next row begins, fade earlier rows; after the voice ends, restore all rows (review begins at `voice_end + 0.35 s`, restore for 0.6 s), then hold full brightness for 2.5 s. Request this as a **3.9 s post-voice hold**. |
 | L9 | Give any final readable item at least **1.5 s** after it appears. Give level cards a **1.2 s** hold. Do not cut a scene until the student has had time to read tips, labels, chips and recap content. |
+| L10 | **Use the free space.** A lone short example in a mostly empty panel is scaled up to fill the band (e.g. 'She plays.' at 132 px). Quiz: 168 px countdown timer disc with running yellow arc; answer pills 86 px with 54 px text; tags 54 px. |
+| L11 | Compound formula chips (`verb`+`-ing`, `was/were`+`verb-ing`) **dock with no gap**, placed by measured width minus the shared border, never by fixed x. Related icons, labels and chips in a column share one centred axis; card text has ≥ 30 px visible-ink padding. |
 
 ## Lesson integrity, recap and end
 

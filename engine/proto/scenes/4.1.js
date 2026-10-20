@@ -4,7 +4,7 @@
 document.head.insertAdjacentHTML("beforeend", `<style>
 .story-page{position:absolute;box-sizing:border-box;border-radius:24px;border:1.5px solid rgba(255,255,255,.18);background:rgba(26,14,63,.46);overflow:hidden}
 .story-spine{position:absolute;width:2px;background:rgba(255,217,61,.48);box-shadow:0 0 10px rgba(255,217,61,.25);transform-origin:center top}
-.past-tag{position:absolute;display:flex;align-items:center;justify-content:center;height:44px;padding:0 18px;box-sizing:border-box;border-radius:22px;background:#FFD93D;color:#281450;font:800 28px Nunito;white-space:nowrap}
+.past-tag{position:absolute;display:flex;align-items:center;justify-content:center;width:140px;height:66px;box-sizing:border-box;border-radius:33px;background:#FFD93D;color:#281450;font:800 38px Nunito;white-space:nowrap;box-shadow:0 0 22px rgba(255,217,61,.38)}
 </style>`);
 const X=60, L=116, R=1344, ORANGE="#FFA448";
 let S=null;
@@ -23,13 +23,16 @@ window.init=function(c){
   const left=el("div","story-page",{left:"22px",top:"22px",width:"575px",height:"546px",borderColor:"rgba(255,217,61,.52)",background:"rgba(52,30,95,.52)"},book);
   const right=el("div","story-page",{left:"631px",top:"22px",width:"575px",height:"546px",borderColor:"rgba(255,217,61,.52)",background:"rgba(52,30,95,.52)"},book);
   const spine=el("div","story-spine",{left:"613px",top:"36px",height:"518px"},book);
-  const sn=sentence("Once upon a time, there\n{was|y} a beautiful princess\nwho {had|y} a kind heart …",152,386,46,content);
-  const bookIc=icon("book",1000,418,112,"rgba(255,255,255,.9)",C.yellow,content,3.2);
-  const heartIc=icon("heart",1024,574,92,"rgba(255,255,255,.9)",C.pink,content,3.4);
-  const cap=masked("PAST TENSES",{left:"1010px",top:"714px",fontFamily:"Nunito",fontWeight:800,fontSize:"22px",letterSpacing:".14em",color:ORANGE,lineHeight:"1"},content);cap.o.classList.add("label");
-  const tagWas=el("div","past-tag",{left:"984px",top:"762px"},content);tagWas.textContent="was";
-  const tagHad=el("div","past-tag",{left:"1116px",top:"762px"},content);tagHad.textContent="had";
-  S={c,pn,content,title,arr,past,rule,book,left,right,spine,sn,bookIc,heartIc,cap,tagWas,tagHad};
+  const sn=sentence("Once upon a time, there\n{was|y} a beautiful princess\nwho {had|y} a kind heart …",170,527,44,content);   // R13: equal ~32 px side padding in the left page, block centred on the right column's axis
+  // Right page (x 747-1322, y 332-878): one centred axis CX; header badge + label, then two equal rows.
+  const CX=1034, BW=96, RW=80+24+140, RX=CX-RW/2;
+  const bookIc=badge("book-open-text",CX-56,404,112,C.yellow,content);
+  const cap=masked("PAST TENSES",{left:"747px",width:"575px",textAlign:"center",top:"544px",paddingLeft:".14em",boxSizing:"border-box",fontFamily:"Nunito",fontWeight:800,fontSize:"28px",letterSpacing:".14em",color:ORANGE,lineHeight:"1"},content);cap.o.classList.add("label");
+  const crownIc=badge("crown",RX,612,80,C.yellow,content);
+  const tagWas=el("div","past-tag",{left:(RX+104)+"px",top:"619px"},content);tagWas.textContent="was";
+  const heartIc=badge("heart",RX,716,80,C.pink,content);
+  const tagHad=el("div","past-tag",{left:(RX+104)+"px",top:"723px"},content);tagHad.textContent="had";
+  S={c,pn,content,title,arr,past,rule,book,left,right,spine,sn,bookIc,crownIc,heartIc,cap,tagWas,tagHad};
   fx(.38,"whoosh",.5); fx(c.was,"pop",.55); fx(c.had,"pop",.55);
   return {layout:"small-storybook"};
 };
@@ -45,9 +48,9 @@ window.seek=function(t){
   s.left.style.opacity=pb;s.right.style.opacity=pb;s.spine.style.transform=`scaleY(${ease.outExpo(prog(t,c.once-.47,.65))})`;
   riseWords(s.sn,t,c.once-.12);
   s.sn.groups.forEach((g,i)=>sweep(g,t,i?c.had:c.was,.38));
-  drawIcon(s.bookIc,prog(t,c.once-.25,.72));
-  drawIcon(s.heartIc,prog(t,c.had-.14,.68));
-  fadeUp(s.cap.o,t,c.was+.02); fadeUp(s.tagWas,t,c.was+.18,.48,14); fadeUp(s.tagHad,t,c.had+.18,.48,14);
+  popBadge(s.bookIc,t,c.once-.25,.55); fadeUp(s.cap.o,t,c.once-.05);
+  popBadge(s.crownIc,t,c.was-.08,.5); fadeUp(s.tagWas,t,c.was+.10,.48,14);
+  popBadge(s.heartIc,t,c.had-.08,.5); fadeUp(s.tagHad,t,c.had+.10,.48,14);
   exitLift(s.content,t); return true;
 };
 })();

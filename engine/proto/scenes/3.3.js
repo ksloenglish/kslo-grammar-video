@@ -29,16 +29,16 @@
     const line=masked("Some can take -ing when they are actions.",{left:L+"px",top:"237px",fontFamily:"Nunito",fontWeight:700,fontSize:"30px",color:C.dim,lineHeight:"1"},standard);
     const rule=hrule(L,281,R-L,.18,standard);
     const defs=[
-      { y:326, word:"THINK", meaning:"= opinion", icon:"bulb", colour:C.yellow, word2:"THINKING", meaning2:"= using your brain", icon2:"gears", colour2:C.pink, leftAt:c.what, rightAt:c.action, ex:"What {is|p} she {thinking|p} now?", exAt:c.what, marks:[c.is,c.thinking] },
-      { y:654, word:"HAVE", meaning:"= own", icon:"family", colour:C.yellow, word2:"HAVING", meaning2:"= eating", icon2:"sushi", colour2:C.pink, leftAt:c.we, rightAt:c.means, ex:"We {were having|p} dinner at a Japanese restaurant.", exAt:c.we, marks:[c.were] },
+      { y:326, word:"THINK", meaning:"= opinion", icon:"lightbulb", colour:C.yellow, word2:"THINKING", meaning2:"= using your brain", icon2:"brain", colour2:C.pink, leftAt:c.what, rightAt:c.action, ex:"What {is|p} she {thinking|p} now?", exAt:c.what, marks:[c.is,c.thinking] },
+      { y:654, word:"HAVE", meaning:"= own", icon:"key", colour:C.yellow, word2:"HAVING", meaning2:"= eating", icon2:"fork-knife", colour2:C.pink, leftAt:c.we, rightAt:c.means, ex:"We {were having|p} dinner at a Japanese restaurant.", exAt:c.we, marks:[c.were] },
     ];
     const rows=defs.map(d=>{
       const g=el("div",null,{position:"absolute",inset:"0"},standard);
       const makeCard=(x,word,meaning,ic,col)=>{
         const card=el("div","tw-card",{left:x+"px",top:d.y+"px",borderColor:col,color:col},g);
-        const iconObj=icon(ic,x+28,d.y+43,52,"rgba(255,255,255,.88)",col,g,3.1);
-        const wd=el("div","tw-word",{left:(x+103)+"px",top:(d.y+27)+"px",color:col},g); wd.textContent=word;
-        const mn=el("div","tw-meaning",{left:(x+103)+"px",top:(d.y+84)+"px"},g); mn.textContent=meaning;
+        const iconObj=badge(ic,x+26,d.y+32,84,col,g);
+        const wd=el("div","tw-word",{left:(x+128)+"px",top:(d.y+27)+"px",color:col},g); wd.textContent=word;
+        const mn=el("div","tw-meaning",{left:(x+128)+"px",top:(d.y+84)+"px"},g); mn.textContent=meaning;
         return {card,iconObj,wd,mn};
       };
       const a=makeCard(L,d.word,d.meaning,d.icon,d.colour);
@@ -70,7 +70,7 @@
         const q=ease.outExpo(prog(t,at-.06,.55)); card.card.style.opacity=q; card.card.style.transform=`translateY(${(1-q)*14}px)`;
         card.wd.style.opacity=q; card.wd.style.transform=`translateY(${(1-q)*12}px)`;
         card.mn.style.opacity=q; card.mn.style.transform=`translateY(${(1-q)*12}px)`;
-        drawIcon(card.iconObj,prog(t,at+.05,.75));
+        popBadge(card.iconObj,t,at+.05,.5);
       };
       showCard(r.a,r.leftAt); showCard(r.b,r.rightAt);
       const ap=ease.outExpo(prog(t,r.rightAt-.08,.55)); r.ar.s.style.opacity=ap; r.ar.s.style.transform=`translateX(${(1-ap)*-12}px)`; drawIcon(r.ar,prog(t,r.rightAt-.08,.7));

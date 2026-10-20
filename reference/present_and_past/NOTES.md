@@ -437,3 +437,62 @@ TODO: visual check of glow titles (level cards 1.0-4.0, 3.3 PLOT TWIST, C), stil
 - proto/layer.py: Chromium path now _chromium() (CHROMIUM env, /usr/bin/chromium, else Playwright's own).
 - scripts/publish_assets.sh stages the repo (cp only; this sandbox has no rsync). gh in an interactive shell can corrupt
   it with colour queries: run gh with '< /dev/null | cat'.
+
+## Teacher feedback round 13 (20 Oct 2026, 13:06 HKT) - TO DO / status
+Timeline map (t0): H 19.8, 1.1 45.5, 1.3 68.23, 3.3 183.87, 4.1 203.4, 4.2 215.27, 4.3 232.6, 4.4 244.87, Q1 261.93..Q4 287.73.
+1 H (~00:28) + 4.4 (~04:08): '?' too thin/unimpressive -> make prominent. Code: H.js:45 / 4.4.js:46
+  icon("question",986,842,118,...). 4.4 later shows mint dot + navy tick (4.4.js:48) -> plan: solid yellow badge with
+  bold navy Fredoka '?' (matches the tick badge), glow + gentle bob.
+2 1.1 (~00:51): enlarge 'She plays.' to use the empty space.
+3 1.3 (~01:11): title formula: 'verb' box + '-ing' box must be ONE compound with no gap (as in past continuous 2.2).
+4 3.3 Plot Twist (~03:17): decent, relevant icons for 'using your brain' (was gears) and 'eating' (was sushi line icon);
+  keep all 4 card icons one consistent style (bulb, family->own?).
+5 4.1 Stories in the past (~03:32): right column icons (book, heart) + PAST TENSES label + was/had chips not prominent,
+  misaligned (book x1000, heart x1024, chips off-centre) -> decent icons, one centred axis, bigger chips.
+6 4.2 (~03:51): shark line icon messed up -> better, prominent graphics for the beach/shark comic panel.
+7 4.3 Careful (~04:00): clapper line icon broken -> decent icon (consider matching icon on OUTSIDE card).
+8 Quiz (_quiz.js): countdown numbers more prominent/decent; '1' optically centred; answer text + boxes slightly larger.
+Icon sources: Phosphor Icons core v2.1.1 (MIT) duotone SVGs from
+  https://cdn.jsdelivr.net/npm/@phosphor-icons/core@2/assets/duotone/<name>-duotone.svg -> design/phosphor/*.svg
+  (brain, fork-knife, bowl-food, bowl-steam, lightbulb, key, hand-coins, book-open, book-open-text, heart, film-slate,
+  globe-hemisphere-west, fish, sun, umbrella, waves, question, warning, house, hand-heart, chat-circle-dots...). No shark.
+  Shark option: Microsoft Fluent Emoji Flat (MIT) https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Shark/Flat/shark_flat.svg
+  -> design/fluent_shark.svg. Tabler outline fish (MIT) -> design/tabler_fish.svg. Noto/Tabler have no shark at those URLs.
+Before stills: build/qa13/before/*.png (scripts/qa_stills.py OUTDIR SID:t,t ...).
+- R13 progress (13:17): scripts/build_icons.py -> proto/icons.js (PH = Phosphor duotone tint at 0.3 + BOLD outline from
+  design/phosphor_bold/<name>.svg [https://cdn.jsdelivr.net/npm/@phosphor-icons/core@2/assets/bold/<name>-bold.svg];
+  ART = Fluent flat SVGs, width/height stripped). shell.html loads icons.js before lib.js. lib.js: rgba(hex,a),
+  badge(name,x,y,size,col,parent,round) = tinted tile + icon at 0.64*size, popBadge(b,t,t0,d).
+  3.3 DONE: lightbulb/brain/key/fork-knife badges 84px at (x+26,y+32), text x+128 (backup /tmp/3.3_before_r13.js).
+  4.1 PATCHED: right page axis CX 1034: book-open-text badge 112 @ y404, 'PAST TENSES' centred 28px @ y544,
+  rows crown+was (y612) / heart+had (y716): badge 80 + chip 140x66 38px (backup /tmp/4.1_before_r13.js).
+  4.2 PLAN: illustrated comic (dusk sky, sun + rays, filled moving wave layers, sand + striped umbrella + towels,
+  Fluent shark leaping out between back/front waves with splash at 'spot', comic '!' burst at 'shark'). Fluent shark
+  faces left, head top-left, tail bottom (leaping pose).
+- R13 progress (13:25): 4.2 DONE comic rewrite (backup /tmp/4.2_before_r13.js): sky gradient CSS, svg layers back(sun+rays rot t*12,
+  waves w1/w2) > shark div (ART.shark 276px @792,164; leaps on spot-.14 outBack from +250px, rotate 16->-4, bob) > front (w3, sand,
+  towels, umbrella, splash drops+foam at spot+.02) > burst star '!' at 1034,98 on 'shark'. Waves scroll seamlessly (PER 120).
+  4.3 DONE (backup /tmp/4.3_before_r13.js): badges film-slate (MINT) @146,344 and globe-hemisphere-west (ORANGE) @746,344, 72px;
+  kicker/sub/pills at card+126 (242 / 842); 'came out' left = 842 + was.offsetWidth + 16.
+  lib.js: inkGlyph(cv,ch,font,fill,optical,glow) = ink-box centring + optical mass correction; qToken(cx,cy,d) yellow '?' disc;
+  animQToken(q,t,t0,out). H and 4.4 use qToken(1045,901,126) (backups /tmp/H_before_r13.js, /tmp/4.4_before_r13.js).
+  QUIZ (backup /tmp/_quiz_before_r13.js): ROOT CAUSE of off-centre '1': old drawCountdownDigit used cx-(left+right)/2 (sign error,
+  ~5 px right). Now inkGlyph 0.6 optical. Countdown = 168 px navy disc + track + yellow arc running down (dashoffset over t0+.08..+.84),
+  centre x 434. Pills 86 px / 54 px font, tick 72, tags 54 px / 24 px, tags top answerY+108, strike baseline 43.
+  REMAINING: 1.1 'She plays.' enlarge; 1.3 verb+-ing compound; render QA stills; full render; captions/verify; push repo + skill update.
+- R13 completed edits (13:33): 1.1 'She plays.' 68 -> 132 px at L,694 (only 's' highlighted; centred in free band under formulas).
+  1.3 '-ing' left = 830 + verb width - 2 (docked like 2.2, shared border, no gap; inner radii already dock to 3). Hand art untouched.
+  4.1 left story text 46 -> 44 px at 170,527: ink x 171-678 in page 138-713 (33/35 px padding), vertical centre 604.5 = page centre.
+  QA stills build/qa14: H/4.4 '?' token, 3.3 badges, 4.1 right axis, 4.2 shark comic, 4.3 film-slate/globe, quiz discs all OK.
+  Measured countdown ink vs disc centre (433.5,541.5): '3' box -1.5 / '2' +0.5 / '1' box -3.5 & mass +2.3 (optical balance);
+  vertical all <=0.5 px. align_audit 1.1 4.1 4.3 Q1 Q3: no suspects. Timeline unchanged 319.60 s.
+  BASELINE PRESERVED: output/..._past_v1.mp4 + .en_v1.srt + .zh-HK_v1.srt (never overwrite baselines again).
+  Full render 13 launched 13:34 -> /tmp/render13.log (render + STEMS=1 audio + mux).
+- R13 RENDER 13 FINAL QA (13:50): output/Kayla_Grammar_Lab_The_present_and_the_past.mp4 = v2 (v1 kept as _v1.mp4).
+  1920x1080 / 30 fps / 48 kHz stereo / 319.600 s; −16.0 LUFS, peak 0.835, LRA 6.0; end frame max pixel 0; last 0.7 s
+  peak −106.5 dB. ASR A 20261020_054716 + bye 054719 (crop L3 t0+6.13 = 309.963); fw cache regenerated.
+  verify_transcript: ALL CHECKS PASSED (77 EN = zh-HK cues, timings identical, pauses after 'yesterday'/'rained' clean,
+  77/77 cue windows, A/B 98.1 %, B/script 98.4 %; only 'practicing' recogniser spelling). SRT change vs v1 = two
+  ASR-timed outro cue ends (≤ 20 ms). YouTube text unchanged. Encoded-frame review build/qa15 (20 frames) all OK;
+  4.4 '?'->tick handover at 4.4+10.8 s clean. Benign 'Broken pipe' clip-decoder log lines as in every render.
+  NEXT: teacher acceptance -> release present-and-past-v2 (MP4 + SRTs), publish_assets.sh, sync skill copy, push.
